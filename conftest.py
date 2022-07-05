@@ -4,8 +4,7 @@ from selenium import webdriver
 
 @pytest.fixture
 def get_webdriver():
-    path = '/home/vladimir/Desktop/testTensor/chromedriver/chromedriver'
-    driver = webdriver.Chrome(executable_path=path)
+    driver = webdriver.Chrome()
     return driver
 
 
