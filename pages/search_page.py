@@ -1,7 +1,8 @@
-from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
+from .locators import Locator
+from .base_page import BasePage
 
 class SearchPage(BasePage):
 
@@ -9,15 +10,13 @@ class SearchPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.search_panel = '//*[@id="text"]'
-        self.suggest_table = '/html/body/div[2]'
-        self.search_result_table = '#search-result > li > div > div > div > a'
+
 
     def get_search_field(self):
-        return self.is_present(By.XPATH, self.search_panel)
+        return self.is_present(*Locator.SEARCH_PANEL)
 
     def get_suggest_table(self):
-        return self.is_present(By.XPATH, self.suggest_table)
+        return self.is_present(*Locator.SUGGEST_TABLE)
 
     def input_text(self, word):
         '''Input text in search field'''
@@ -29,7 +28,7 @@ class SearchPage(BasePage):
 
 
     def get_search_results(self):
-        return self.are_visible(By.CSS_SELECTOR, self.search_result_table)
+        return self.are_visible(*Locator.SEARCH_RESULT_PANEL)
 
     def get_search_results_links(self) -> list:
         links = self.get_search_results()
